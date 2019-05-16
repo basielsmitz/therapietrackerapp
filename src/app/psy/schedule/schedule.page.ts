@@ -39,8 +39,6 @@ export class SchedulePage implements OnInit {
       this.clientService.getClients(this.token).toPromise(),
       this.toDoService.getTodos(this.token).toPromise()
     ]);
-    console.log(await this.sessionService.getSessionsToday(this.token, dateString).toPromise())
-    console.log(data[0]);
     if(data[0] && data[1]) {
       this.sessions = data[0].data.entries.map(session => {
         return {

@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InvitationService {
 
-  private baseUrl = 'http://localhost:3000/client/psychologist/invite/';
+  // private baseUrl = 'http://localhost:3000/client/psychologist/invite/';
+  private baseUrl = 'https://therapietracker-backend.herokuapp.com/client/psychologist/invite/';
+
   constructor(
     private http: HttpClient,
   ) { }

@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TodoService {
-  private baseUrl = 'http://localhost:3000/psy/todo/';
+  private baseUrl = 'https://therapietracker-backend.herokuapp.com/psy/todo/';
+  // private baseUrl = 'http://localhost:3000/psy/todo/';
   constructor(
     private http: HttpClient,
   ) { }

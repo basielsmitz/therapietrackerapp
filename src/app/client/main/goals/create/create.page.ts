@@ -54,7 +54,6 @@ export class CreatePage implements OnInit, DoCheck {
       };
     }
     const newGoal: any = await this.goalService.createGoal(data, this.token).toPromise();
-    console.log(newGoal);
     if (newGoal) {
       this.router.navigate(['./client/goals/']);
     }

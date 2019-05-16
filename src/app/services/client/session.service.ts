@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SessionService {
 
-  private baseUrl = 'http://localhost:3000/client/session/';
+  // private baseUrl = 'http://localhost:3000/client/session/';
+  private baseUrl = 'https://therapietracker-backend.herokuapp.com/client/session/';
+
   constructor(
     private http: HttpClient,
   ) { }

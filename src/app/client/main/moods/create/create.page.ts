@@ -75,7 +75,6 @@ export class CreatePage implements OnInit {
     const randQuestions = [];
     this.token = await this.storage.get('authToken');
     const moodData: any = await this.moodService.getMoodData(this.token).toPromise();
-    console.log(moodData);
     const questions = moodData.data.questions.map(question => {
       return {
         id: question.id,
@@ -101,7 +100,6 @@ export class CreatePage implements OnInit {
       questions.splice(random, 1);
       if (i === 1) {
         this.questions = randQuestions;
-        console.log(this.questions);
         this.loading = false;
       }
     }
@@ -118,7 +116,6 @@ export class CreatePage implements OnInit {
     }
   }
   selectEmotion(emotion) {
-    console.log(emotion);
     this.emotions[this.emotions.indexOf(emotion)].active = !this.emotions[this.emotions.indexOf(emotion)].active;
   }
   addEmotion() {

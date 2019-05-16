@@ -38,11 +38,9 @@ export class DetailPage implements OnInit {
   async getList() {
     this.token = await this.storage.get('authToken');
     const list: any = await this.questionlistService.getQuestionList(this.route.snapshot.params.listId, this.token).toPromise();
-    console.log(list);
     if(list) {
       this.title = list.data.entry.title;
       this.description = list.data.entry.description;
-      console.log(list.data);
       list.data.questions.forEach(question => {
         this.questions.push({
           question: question.question,
@@ -52,7 +50,6 @@ export class DetailPage implements OnInit {
         range: question.type === 'range' ? JSON.parse(question.data) : null,
         data: question.data,
         });
-        console.log(this.questions);
       });
     }
   }
@@ -86,11 +83,9 @@ export class DetailPage implements OnInit {
         range: data.data.range,
         data: JSON.stringify(qData),
       });
-      console.log(this.questions);
     }
   }
   async editQuestion(question) {
-    console.log(question);
     const modal = await this.modalController.create({
       component: NewQuestionComponent,
       componentProps: {
@@ -120,7 +115,6 @@ export class DetailPage implements OnInit {
         range: data.data.range,
         data: JSON.stringify(qData),
       });
-      console.log(this.questions);
     }
   }
   async save() {
@@ -129,6 +123,5 @@ export class DetailPage implements OnInit {
       description: this.description,
       questions: this.questions,
     }, this.token).toPromise();
-    console.log(ql);
   }
 }

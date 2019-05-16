@@ -17,7 +17,8 @@ export class AuthenticationService {
     private storage: Storage,
     ) { }
 
-    private baseUrl = 'http://localhost:3000/';
+    // private baseUrl = 'http://localhost:3000/';
+    private baseUrl = 'https://therapietracker-backend.herokuapp.com/';
 
     async login(data) {
       const login: any = await this.http.post(this.baseUrl + 'auth/login', data ,

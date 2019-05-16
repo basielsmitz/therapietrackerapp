@@ -62,11 +62,9 @@ export class CreatePage implements OnInit, DoCheck {
         range: data.data.range,
         data: JSON.stringify(qData),
       });
-      console.log(this.questions);
     }
   }
   async editQuestion(question) {
-    console.log(question);
     const modal = await this.modalController.create({
       component: NewQuestionComponent,
       componentProps: {
@@ -96,7 +94,6 @@ export class CreatePage implements OnInit, DoCheck {
         range: data.data.range,
         data: JSON.stringify(qData),
       });
-      console.log(this.questions);
     }
   }
   async save() {
@@ -106,6 +103,5 @@ export class CreatePage implements OnInit, DoCheck {
       description: this.description,
       questions: this.questions,
     }, this.token).toPromise();
-    console.log(ql);
   }
 }

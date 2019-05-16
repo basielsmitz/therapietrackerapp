@@ -48,7 +48,6 @@ export class EvaluatePage implements OnInit {
         }
       })
     };
-    console.log(data);
     const session: any = await this.sessionService.evaluateSession(this.route.snapshot.params.sessionId, data, this.token).toPromise();
     if (session.messages.length <= 0) {
       this.router.navigate(['./client/sessions/']);

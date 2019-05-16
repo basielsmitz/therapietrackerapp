@@ -23,6 +23,11 @@
                 </ion-item>
             </ion-col>  
         </ion-row>
+        <ion-row *ngIf="!clients && !loading" >
+            <ion-col class="centered">
+                <p>U hebt nog geen contactpersonen</p>
+            </ion-col>
+        </ion-row>
     </ion-grid>
 
 </ion-content>

@@ -65,9 +65,7 @@ export class NewPage implements OnInit, DoCheck {
     this.clients = await this.clientService.getClients(this.token).toPromise();
     this.questionLists = await this.questionlistService.getQuestionLists(this.token).toPromise();
     this.loading = false;
-    console.log(this.questionLists);
     const sessionRating = this.questionLists.data.entries.find(ql => ql.title === 'Session rating');
-    console.log(sessionRating);
     this.selectedQuestionLists.push(sessionRating.id)
     
   }

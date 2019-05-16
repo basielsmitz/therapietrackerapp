@@ -11,13 +11,14 @@
     <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
   <ion-grid>
     <ion-row>
-      <ion-col class="smallTabs">
+      <ion-col *ngIf="goals"  class="smallTabs">
         <a [ngClass]="{'right': true, 'active' : view === 'running' }" (click)="view = 'running'">Lopend</a>
         <a [ngClass]="{'right': true, 'active' : view === 'completed' }" (click)="view = 'completed'">Behaald </a>
       </ion-col>
     </ion-row>
     <ion-row>
         <ion-col class="centered">
+          <p *ngIf="!goals && !loading" >U hebt nog geen goals toegevoegd!</p>
           <ion-button [routerLink]="['/client/goals/create']" fill="outline" size="default">Nieuwe goal</ion-button>
         </ion-col>
       </ion-row>

@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MoodService {
 
-  private baseUrl = 'http://localhost:3000/client/mood/';
+  // private baseUrl = 'http://localhost:3000/client/mood/';
+  private baseUrl = 'https://therapietracker-backend.herokuapp.com/client/mood/';
+
   constructor(
     private http: HttpClient,
   ) { }

@@ -37,7 +37,6 @@ export class NewQuestionComponent implements OnInit, DoCheck {
     }
   }
   ngOnInit() {
-    console.log(this.options);
     if (!this.range) {
       this.range = {
         value: 5,

@@ -27,8 +27,8 @@
                 </ion-item>
             </ion-col>
         </ion-row>
-        <ion-row *ngIf="!sessions" >
-            <ion-col>
+        <ion-row *ngIf="!sessions && !loading" >
+            <ion-col class="centered">
                 <p>
                     Er zijn vandaag geen afspraken gepland.
                 </p>

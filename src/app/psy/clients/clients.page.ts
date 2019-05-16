@@ -32,15 +32,13 @@ export class ClientsPage implements OnInit {
   async getClients() {
     try {
       const clients: any = await this.clientService.getClients(this.token).toPromise();
-      this.clients = clients.data;
       this.loading = false;
+      if(clients) {
+        this.clients = clients.data;
+      }
     } catch (err) {
       let message = 'Er liep iets mis bij het laden van de cliënten';
       let color = 'danger';
-      if (err.error.errors.statusCode === 404) {
-        message = 'U hebt nog geen clienten';
-        color = null;
-      }
         const toast = await this.toastController.create({
         message: message,
         color: color,
@@ -108,7 +106,7 @@ export class ClientsPage implements OnInit {
                 const error = new Error('Vul beide velden in');
                 throw error;
               }
-              const invite = await this.http.post('http://localhost:3000/psy/client', data, {
+              const invite = await this.http.post('https://therapietracker-backend.herokuapp.com/psy/client', data, {
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + token,
@@ -138,8 +136,5 @@ export class ClientsPage implements OnInit {
 
     await alert.present();
 
-  }
-  clicked() {
-    console.log('clicked');
   }
 }

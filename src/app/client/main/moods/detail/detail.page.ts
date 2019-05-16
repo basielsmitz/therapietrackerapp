@@ -21,7 +21,6 @@ export class DetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.params);
     this.getMoodDay();
   }
   async getMoodDay() {
@@ -38,9 +37,6 @@ export class DetailPage implements OnInit {
     this.moods.entries.forEach(mood => {
       mood.questions.forEach(question => {
         question.data = JSON.parse(question.data);
-        if (mood === this.moods.entries[this.moods.entries.length - 1] && question === mood.questions[mood.questions.length - 1]) {
-          console.log(this.moods);
-        }
       });
     });
   }

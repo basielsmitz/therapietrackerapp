@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { MoodService } from 'src/app/services/client/mood.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-moods',
@@ -17,7 +18,14 @@ export class MoodsPage implements OnInit {
   constructor(
     private storage: Storage,
     private moodService: MoodService,
-  ) { }
+    private router: Router,
+    ) {
+      router.events.subscribe(route => {
+        if (route instanceof NavigationEnd) {
+            this.getMoods();
+        }
+      });
+     }
 
   ngOnInit() {
     this.getMoods();
@@ -26,8 +34,11 @@ export class MoodsPage implements OnInit {
   async getMoods() {
     this.token = await this.storage.get('authToken');
     const moods: any = await this.moodService.getMoods(this.token).toPromise();
-    this.moods = moods.data.entries;
-    this.groupByDay();
+    this.loading = false;
+    if (moods) {
+      this.moods = moods.data.entries;
+      this.groupByDay();
+    }
   }
 
   groupByDay() {
@@ -79,7 +90,6 @@ export class MoodsPage implements OnInit {
         });
         this.lineData.reverse();
         this.lineLabels.reverse();
-        this.loading = false;
       }
     });
   }

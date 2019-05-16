@@ -21,6 +21,12 @@
     <div *ngFor="let moodDay of groupedMoods">
         <app-mood-day [moodDay]="moodDay"></app-mood-day>    
     </div>
+    <ion-row *ngIf="!groupedMoods && !loading" >
+        <ion-col class="centered">
+          <p>Er zijn nog geen moods geregistreerd</p>
+          <ion-button [routerLink]="['/client/moods/create']" fill="outline" size="default">Voeg een mood toe</ion-button>
+        </ion-col>
+      </ion-row>
   </ion-grid>
   
   

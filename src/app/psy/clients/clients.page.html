@@ -13,6 +13,7 @@
     <ion-grid>
         <ion-row>
             <ion-col class="centered" (click)="addClient()" >
+                <p *ngIf="!clients && !loading"  >U hebt nog geen cliënten</p>
                     <ion-button fill="outline" size="default">Cliënt uitnodigen</ion-button>
             </ion-col>
         </ion-row>

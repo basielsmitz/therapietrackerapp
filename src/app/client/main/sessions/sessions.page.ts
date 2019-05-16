@@ -14,6 +14,7 @@ export class SessionsPage implements OnInit {
   public toEvaluateSessions = null;
   public evaluatedSessions = null;
   public loading = true;
+  public noSessions = false;
 
   constructor(
     private storage: Storage,
@@ -23,11 +24,9 @@ export class SessionsPage implements OnInit {
   ) {
     router.events.subscribe(route => {
       if (route instanceof NavigationEnd) {
-        console.log(window.location.href.split('/client/')[1] );
 
         if (window.location.href.split('/client/')[1] === 'sessions') {
           this.getSessions();
-          console.log('reroute');
         }
       }
     });
@@ -39,33 +38,37 @@ export class SessionsPage implements OnInit {
     this.token = await this.storage.get('authToken');
 
     const sessions: any = await this.sessionService.getSessions(this.token).toPromise();
-    const today = new Date();
-    this.comingSessions = sessions.data.filter(session => {
-      const sessionDate = new Date(session.entry.date);
-      sessionDate.setHours(
-        session.entry.startTime.split(':')[0],
-        session.entry.startTime.split(':')[1]
-      );
-      return today.getTime() < sessionDate.getTime();
-    });
-    this.toEvaluateSessions = sessions.data.filter(session => {
-      const sessionDate = new Date(session.entry.date);
-      sessionDate.setHours(
-        session.entry.startTime.split(':')[0],
-        session.entry.startTime.split(':')[1]
-      );
-      return session.answers.length <= 0 && today.getTime() > sessionDate.getTime();
-    });
-    const evaluated = sessions.data.filter(session => {
-      const sessionDate = new Date(session.entry.date);
-      sessionDate.setHours(
-        session.entry.startTime.split(':')[0],
-        session.entry.startTime.split(':')[1]
-      );
-      return session.answers.length > 0 && today.getTime() > sessionDate.getTime();
-    });
-    this.evaluatedSessions = evaluated.slice(0, 10);
     this.loading = false;
+    if (sessions) {
+      const today = new Date();
+      this.comingSessions = sessions.data.filter(session => {
+        const sessionDate = new Date(session.entry.date);
+        sessionDate.setHours(
+          session.entry.startTime.split(':')[0],
+          session.entry.startTime.split(':')[1]
+        );
+        return today.getTime() < sessionDate.getTime();
+      });
+      this.toEvaluateSessions = sessions.data.filter(session => {
+        const sessionDate = new Date(session.entry.date);
+        sessionDate.setHours(
+          session.entry.startTime.split(':')[0],
+          session.entry.startTime.split(':')[1]
+        );
+        return session.answers.length <= 0 && today.getTime() > sessionDate.getTime();
+      });
+      const evaluated = sessions.data.filter(session => {
+        const sessionDate = new Date(session.entry.date);
+        sessionDate.setHours(
+          session.entry.startTime.split(':')[0],
+          session.entry.startTime.split(':')[1]
+        );
+        return session.answers.length > 0 && today.getTime() > sessionDate.getTime();
+      });
+      this.evaluatedSessions = evaluated.slice(0, 10);
+    } else {
+      this.noSessions = true;
+    }
   }
 
   getScore(session) {

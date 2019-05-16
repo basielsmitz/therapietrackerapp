@@ -16,6 +16,7 @@ export class BookingPage implements OnInit {
   private slotsAdded = false;
   private previousUrl = null;
   public loading = true;
+  public noClients = false;
 
   constructor(
     private sessionService: SessionService,
@@ -26,7 +27,6 @@ export class BookingPage implements OnInit {
     router.events.subscribe(route => {
       if (route instanceof NavigationEnd) {
         if (this.previousUrl && this.previousUrl.substring(12, this.previousUrl.length)) {
-          console.log('yes');
           this.getSessions();
         }
 
@@ -40,43 +40,75 @@ export class BookingPage implements OnInit {
   }
   async getSessions() {
     const token = await this.storage.get('authToken');
-    // const sessionTask: any = await this.sessionService.getAllSessions(token).toPromise();
-    // const clientTask = this.clientService.getClients(token).toPromise();
-    // const data: any = [await sessionTask, await clientTask];
     const data: any = await Promise.all([
       this.sessionService.getAllSessions(token).toPromise(),
       this.clientService.getClients(token).toPromise()
     ]);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    today.setDate(today.getDate() + 1);
-    let tempSessions = data[0].data.entries.filter((session) => {
-      const sessionDate = new Date(session.date);
-      return sessionDate.getTime() > today.getTime();
-    });
-    console.log(tempSessions);
-    if (tempSessions.length > 0) {
-      tempSessions = tempSessions.map(session => {
-        return {
-          id: session.id,
-          date: session.date,
-          startTime: session.startTime.substring(0, session.startTime.length - 3),
-          endTime: session.endTime.substring(0, session.endTime.length - 3),
-          location: session.location,
-          client: data[1].data.filter(client => {
-            return client.id === session.clientId;
-          })
-        };
-      });
-      tempSessions.sort((a: any, b: any) => {
-        const dateA = new Date(`${a.date.substring(0, 10)}T${a.startTime}`);
-        const dateB = new Date(`${b.date.substring(0, 10)}T${b.startTime}`);
-        return dateA.getTime() - dateB.getTime();
-      });
-      this.groupByDay(tempSessions);
+    this.loading = false;
+
+    if (data[1]) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      today.setDate(today.getDate() + 1);
+      if (data[0]) {
+        let tempSessions = data[0].data.entries.filter((session) => {
+          const sessionDate = new Date(session.date);
+          return sessionDate.getTime() > today.getTime();
+        });
+        if (tempSessions.length > 0) {
+          tempSessions = tempSessions.map(session => {
+            return {
+              id: session.id,
+              date: session.date,
+              startTime: session.startTime.substring(0, session.startTime.length - 3),
+              endTime: session.endTime.substring(0, session.endTime.length - 3),
+              location: session.location,
+              client: data[1].data.filter(client => {
+                return client.id === session.clientId;
+              })
+            };
+          });
+          tempSessions.sort((a: any, b: any) => {
+            const dateA = new Date(`${a.date.substring(0, 10)}T${a.startTime}`);
+            const dateB = new Date(`${b.date.substring(0, 10)}T${b.startTime}`);
+            return dateA.getTime() - dateB.getTime();
+          });
+          this.groupByDay(tempSessions);
+        } else {
+          let tempSessions = data[0].data.entries.filter((session) => {
+            const sessionDate = new Date(session.date);
+            return sessionDate.getTime() > today.getTime();
+          });
+          if (tempSessions.length > 0) {
+            tempSessions = tempSessions.map(session => {
+              return {
+                id: session.id,
+                date: session.date,
+                startTime: session.startTime.substring(0, session.startTime.length - 3),
+                endTime: session.endTime.substring(0, session.endTime.length - 3),
+                location: session.location,
+                client: data[1].data.filter(client => {
+                  return client.id === session.clientId;
+                })
+              };
+            });
+            tempSessions.sort((a: any, b: any) => {
+              const dateA = new Date(`${a.date.substring(0, 10)}T${a.startTime}`);
+              const dateB = new Date(`${b.date.substring(0, 10)}T${b.startTime}`);
+              return dateA.getTime() - dateB.getTime();
+            });
+            this.groupByDay(tempSessions);
+          } else {
+            this.fillMonth(tempSessions);
+          }
+        }
+      } else {
+        this.fillMonth([]);
+      }
     } else {
-      this.fillMonth(tempSessions);
+      this.noClients = true;
     }
+
   }
   groupByDay(sessions) {
     const grouped = [];
@@ -260,7 +292,6 @@ export class BookingPage implements OnInit {
       }
       if (day === this.month[this.month.length - 1]) {
         this.setVisibleWeek(1);
-        this.loading = false;
       }
     });
   }

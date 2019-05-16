@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ClientService {
 
-  private baseUrl = 'http://localhost:3000/psy/client/';
+  // private baseUrl = 'http://localhost:3000/psy/client/';
+  private baseUrl = 'https://therapietracker-backend.herokuapp.com/psy/client/';
+
 
 
   constructor(

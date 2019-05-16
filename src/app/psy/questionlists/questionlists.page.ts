@@ -26,15 +26,9 @@ export class QuestionlistsPage implements OnInit {
     this.lists = await this.questionListSerivce.getQuestionLists(this.token).toPromise();
     this.loading = false;
     this.lists = this.lists.data.entries;
-    console.log(this.lists);
-  }
-  addList() {
-    console.log('adding list');
   }
   async delete(list) {
-    console.log('deleting');
     const deleted = await(this.questionListSerivce.deleteQuestionLists(list.id, this.token)).toPromise();
-    console.log(deleted);
     if(deleted) {
       this.lists.splice(this.lists.indexOf(list), 1);
     }

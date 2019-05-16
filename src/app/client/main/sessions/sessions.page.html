@@ -10,6 +10,11 @@
 <ion-content>
     <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
   <ion-grid>
+    <ion-row *ngIf="noSessions" >
+      <ion-col class="centered">
+        Er is geen psycholoog die sessies voor u heeft geregistreerd
+      </ion-col>
+    </ion-row>
       <ion-row *ngIf="comingSessions">
           <ion-col *ngIf="comingSessions.length > 0">
             <h3>Volgende sessies</h3>

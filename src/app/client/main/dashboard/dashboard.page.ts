@@ -6,6 +6,7 @@ import { MoodService } from 'src/app/services/client/mood.service';
 import { SessionService } from 'src/app/services/client/session.service';
 import { GoalService } from 'src/app/services/client/goal.service';
 import { InvitationService } from 'src/app/services/client/invitation.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +28,14 @@ export class DashboardPage implements OnInit {
     private goalService: GoalService,
     private inviteService: InvitationService,
     private storage: Storage,
-  ) { }
+    private router: Router,
+    ) {
+      router.events.subscribe(route => {
+        if (route instanceof NavigationEnd) {
+            this.getData();
+        }
+      });
+     }
 
   ngOnInit() {
     this.getData();
@@ -43,7 +51,6 @@ export class DashboardPage implements OnInit {
         this.goalService.getGoals(this.token).toPromise()
       ]
     )
-    console.log(data[0]);
     const today = new Date();
     if (data[0]) {
       this.invites = data[0].data;
@@ -106,10 +113,8 @@ export class DashboardPage implements OnInit {
     }
   }
   async changeStatus(goal) {
-    console.log('testing');
     const newGoal: any = await this.goalService.changeStatusGoal(goal.id, this.token).toPromise();
     if (newGoal) {
-      console.log(newGoal);
       this.goals[this.goals.indexOf(goal)] = newGoal.data;
     }
   }

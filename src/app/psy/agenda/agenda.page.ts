@@ -25,10 +25,10 @@ export class AgendaPage implements OnInit {
   async getData() {
     this.token = await this.storage.get('authToken');
     const clients: any = await this.clientService.getClients(this.token).toPromise();
-    console.log(clients);
-    this.clients = clients.data;
     this.loading = false;
-    
+    if (clients) {
+      this.clients = clients.data;
+    }
   }
 
 }

@@ -21,7 +21,6 @@ export class OverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.client);
     if(!this.client.diagnosis) {
       this.inputDiagnosis = true;
     }

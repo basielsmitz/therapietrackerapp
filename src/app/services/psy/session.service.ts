@@ -7,7 +7,9 @@ import { ToastController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class SessionService {
-  private baseUrl = 'http://localhost:3000/psy/session/';
+  // private baseUrl = 'http://localhost:3000/psy/session/';
+  private baseUrl = 'https://therapietracker-backend.herokuapp.com/psy/session/';
+
   constructor(
     private http: HttpClient,
     private storage: Storage,

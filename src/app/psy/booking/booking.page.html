@@ -10,6 +10,13 @@
 
 <ion-content>
     <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+    <ion-grid *ngIf="noClients" >
+      <ion-row>
+        <ion-col class="centered">
+          <p>U moet eerst cliënten hebben voor u een sessie kan inplannen</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   <ion-grid *ngIf="month">
     <ion-row>
       <ion-col size="12">

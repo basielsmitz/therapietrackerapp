@@ -12,6 +12,5 @@ export class SegmentsComponent implements OnInit {
   ngOnInit() {}
 
   segmentChanged(event) {
-    console.log(event.detail.value);
   }
 }

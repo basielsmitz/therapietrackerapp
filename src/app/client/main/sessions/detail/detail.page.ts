@@ -28,7 +28,6 @@ export class DetailPage implements OnInit {
     this.token = await this.storage.get('authToken');
     const session = await this.sessionService.getSession(this.route.snapshot.params.sessionId, this.token).toPromise();
     this.session = session;
-    console.log(session);
     const generalQuestion = this.session.questions.find(question => {
       return question.question === 'Algemene Beoordeeling';
     });

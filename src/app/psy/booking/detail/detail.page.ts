@@ -53,7 +53,6 @@ export class DetailPage implements OnInit, DoCheck {
     this.session = await this.sessionService.getSession(this.route.snapshot.params.bookingId, this.token).toPromise();
     this.questionLists = await this.questionlistService.getQuestionLists(this.token).toPromise();
     this.questionLists = this.questionLists.data.entries;
-    console.log(this.questionLists);
     this.session = this.session.data;
     const testDate = new Date(this.session.entry.date);
     testDate.setHours(parseInt(this.session.entry.startTime.split(':')[0], this.session.entry.startTime.split(':')[1]));
@@ -61,8 +60,6 @@ export class DetailPage implements OnInit, DoCheck {
     if (testDate.getTime() < today.getTime()) {
       this.past = true;
     }
-    console.log(this.past);
-    console.log(this.session);
     this.session.questionLists.forEach(ql => {
       this.selectedQuestionLists.push(ql.id);
       if (ql === this.session.questionLists[this.session.questionLists.length - 1]) {
