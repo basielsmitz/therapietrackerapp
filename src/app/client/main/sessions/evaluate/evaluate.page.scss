@@ -1,0 +1,30 @@
+p {
+    font-weight: bold;
+    margin: 5px 5px;
+}
+.float-right {
+    float: right;
+}
+.selected {
+    background-color: purple;
+  }
+  .right {
+    text-align: right;
+  }
+  ion-range {
+    ion-label {
+      position: absolute;
+      top: 0;
+      z-index: -1;
+    }
+    ion-label:nth-of-type(1) {
+      left: 1px;
+    }
+    ion-label:nth-of-type(2) {
+      right: 1px;
+    }
+  }
+  h4 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+}

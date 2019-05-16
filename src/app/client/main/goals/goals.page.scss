@@ -1,0 +1,24 @@
+ion-icon.done {
+    border: var(--ion-color-secondary) solid  2px;
+    border-radius: 50%;
+    padding: 2px;
+    color: var(--ion-color-secondary);
+}
+ion-icon.open {
+    border: var(--ion-color-dark) solid  2px;
+    border-radius: 50%;
+    padding: 2px;
+    color: transparent;
+
+}
+.smallTabs {
+    a {
+        margin-left: 10px;
+    }
+}
+.right {
+    float: right;
+}
+.active {
+    font-weight: bold;
+}

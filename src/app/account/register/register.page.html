@@ -1,0 +1,40 @@
+<ion-content>
+  <div class="backdrop">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-img src="assets/icon/logo.svg"></ion-img>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="10" offset="1">
+                  <ion-item>
+                    <ion-input placeholder="Familienaam" [(ngModel)]="profileData.familyName"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input placeholder="Voornaam" [(ngModel)]="profileData.firstName"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input placeholder="Telefoonnummer" [(ngModel)]="profileData.phone" type="text"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <!-- <ion-label> Geboortedatum </ion-label> -->
+                    <ion-datetime placeholder="Geboortedatum" [(ngModel)]="profileData.birthdate" display-format="DD MMM, YYYY"></ion-datetime>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input placeholder="Email" [(ngModel)]="loginData.email"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input placeholder="Password" [(ngModel)]="loginData.password" type="password"></ion-input>
+                  </ion-item>
+                  <ion-button (click)="register()" expand="full">verzend</ion-button> <a
+                    [routerLink]="['/login']">login</a>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

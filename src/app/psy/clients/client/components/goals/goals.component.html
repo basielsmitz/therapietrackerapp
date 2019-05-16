@@ -1,0 +1,54 @@
+<ion-grid>
+  <ion-row *ngIf="completed.length <= 0 && running.length <= 0" >
+    <ion-col class="centered">
+        Deze client heeft nog geen Goals
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="smallTabs">
+      <a *ngIf="completed.length > 0"  [ngClass]="{'right': true, 'active' : view === 'running' }" (click)="view = 'running'">Lopend</a>
+      <a *ngIf="running.length > 0"  [ngClass]="{'right': true, 'active' : view === 'completed' }" (click)="view = 'completed'">Behaald </a>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-grid *ngIf="view === 'completed'" class="completed">
+      <ion-row *ngFor="let goal of completed" class="completed goal">
+        <ion-col size="1">
+          <div class="icon-wrapper">
+            <ion-icon name="radio-button-on"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col size="9">
+          <p>{{goal.title}}</p>
+        </ion-col>
+        <ion-col size="2">
+          <div class="icon-wrapper">
+            <ion-icon [ngClass]="{'open': !goal.status, 'done': goal.status}" name="checkmark"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="view === 'running'" class="running">
+      <ion-row *ngFor="let goal of running" class="running goal">
+        <ion-col size="1">
+          <div class="icon-wrapper">
+            <ion-icon name="radio-button-on"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col size="9">
+          <p>{{goal.title}}</p>
+          <p class="time" *ngIf="goal.startDate && goal.endDate">Termijn: <span
+              class="right">{{goal.startDate.substring(0, 10)}} - {{goal.endDate.substring(0, 10)}}</span></p>
+          <p class="time" *ngIf="goal.endDate && !goal.startDate">Tegen: <span
+              class="right">{{goal.endDate.substring(0, 10)}}</span></p>
+        </ion-col>
+        <ion-col size="2">
+          <div class="icon-wrapper">
+            <ion-icon [ngClass]="{'open': !goal.status, 'done': goal.status}" name="checkmark"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-row>
+</ion-grid>

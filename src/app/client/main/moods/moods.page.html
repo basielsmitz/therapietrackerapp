@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title   color="light">Moods</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="lineData && lineLabels" >
+        <app-linechart
+        [labels]="lineLabels"
+        [data]="lineData"
+        ></app-linechart>
+      </ion-col>
+    </ion-row>
+    <div *ngFor="let moodDay of groupedMoods">
+        <app-mood-day [moodDay]="moodDay"></app-mood-day>    
+    </div>
+  </ion-grid>
+  
+  
+  
+  
+  
+  
+</ion-content>
+<app-toolbar-client></app-toolbar-client>

@@ -1,0 +1,18 @@
+<ion-footer [hidden]="devWidth > 576">
+    <ion-toolbar>
+        <ion-tabs >
+            <ion-tab-bar slot="bottom">
+                <div *ngFor="let p of pages">
+                    <ion-tab-button *ngIf="p.title==='Add'" (click)="openMore($event)">
+                        <ion-label color="tertiary">{{p.title}}</ion-label>
+                        <ion-icon color="secondery" [name]="p.icon"></ion-icon>
+                    </ion-tab-button>
+                    <ion-tab-button *ngIf="!p.funct"  [routerLink]="p.url" >
+                        <ion-label color="tertiary">{{p.title}}</ion-label>
+                        <ion-icon color="secondery" [name]="p.icon"></ion-icon>
+                    </ion-tab-button>
+                </div>
+            </ion-tab-bar>
+        </ion-tabs>
+    </ion-toolbar>
+</ion-footer>

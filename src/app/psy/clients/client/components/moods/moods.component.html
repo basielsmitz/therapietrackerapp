@@ -1,0 +1,23 @@
+<ion-grid>
+  <ion-row>
+    <ion-col *ngIf="lineData && lineLabels" >
+      <app-linechart
+      [labels]="lineLabels"
+      [data]="lineData"
+      ></app-linechart>
+    </ion-col>
+  </ion-row>
+  <div    >
+      <app-mood-day *ngFor="let moodDay of groupedMoods" [moodDay]="moodDay"></app-mood-day>    
+  </div>
+  <ion-row *ngIf="moods.length <= 0" >
+    <ion-col class="centered">
+        deze client heeft nog geen moods geregistreerd
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+

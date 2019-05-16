@@ -1,0 +1,26 @@
+.selected {
+  border-bottom: 2px solid var(--ion-color-primary);
+}
+.right {
+  text-align: right;
+}
+.mood {
+  p {
+    margin: 0;
+    padding-top: 10px;
+    font-size: 12px;
+  }
+}
+h4 {
+  font-size: 16px;
+}
+.buttons {
+  ion-button {
+    margin: 0 15px 0 15px;
+  }
+}
+ion-radio-group {
+  ion-item {
+    border: none;
+  }
+}

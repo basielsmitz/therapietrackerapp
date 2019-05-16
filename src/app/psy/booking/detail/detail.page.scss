@@ -1,0 +1,25 @@
+p {
+    font-weight: bold;
+    margin: 5px 5px;
+}
+
+.icon-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ion-icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 10px
+
+    }
+}
+img {
+    width: 50%;
+}
+.notes {
+    p {
+        font-weight: normal;
+    }
+}

@@ -1,0 +1,13 @@
+<ion-item button="true" (click)="addToDo()">
+  <ion-icon slot="start" name="add-circle"></ion-icon>
+  <ion-label>ToDo</ion-label>
+</ion-item>
+<ion-item button="true" (click)="addClient()">
+  <ion-icon slot="start" name="add-circle"></ion-icon>
+  <ion-label>Client</ion-label>
+</ion-item>
+<ion-item button="true" (click)="dismiss()"  [routerLink]="['/psy/questionlists/create']">
+  <ion-icon slot="start" name="add-circle"></ion-icon>
+  <ion-label>Vragenlijst
+  </ion-label>
+</ion-item>

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title   color="light">Create</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none" >
+          <ion-input placeholder="Titel" [(ngModel)]="title"></ion-input>
+        </ion-item>
+        <ion-item lines="none" >
+          <ion-label>Type</ion-label>
+          <ion-select [(ngModel)]="type">
+            <ion-select-option value="eenmalig">Eenmalig</ion-select-option>
+            <ion-select-option value="einddatum">Einddatum</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item lines="none"  *ngIf="type === 'einddatum'" >
+            <ion-label *ngIf="type === 'einddatum'" >Einddatum</ion-label>
+            <ion-datetime [(ngModel)]="end" [min]="minEnd | date:'yyyy-MM-dd'" max="2025-12-31"  display-format="DD/MM/YYYY"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col class="centered">
+          <ion-button [disabled]="disabled" (click)="save()" fill="outline" size="default">Opslaan</ion-button>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>
+<app-toolbar-client></app-toolbar-client>

@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title color="light">{{date}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+  <ion-grid *ngIf="moods">
+    <ion-row>
+      <ion-col class="mood-image-container">
+        <img [src]="getAverageMood()" alt="mood">
+      </ion-col>
+    </ion-row>
+    <ion-row class="moodEntry" *ngFor="let mood of moods.entries">
+      <ion-col class="head" size="12">{{getTime(mood.entry.createdAt)}} <span [ngClass]="{
+            'zeerGoed': mood.entry.mood === 5, 
+            'goed': mood.entry.mood === 4, 
+            'matig': mood.entry.mood === 3, 
+            'slecht': mood.entry.mood === 2, 
+            'zeerSlecht': mood.entry.mood === 1,
+            'right': true
+          }">{{getMoodName(mood.entry.mood)}}</span>
+      </ion-col>
+      <ion-col size="12">
+        <ion-chip *ngFor="let emotion of mood.emotions">
+          <ion-label>{{emotion.title}}</ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="12" *ngFor="let question of mood.questions">
+        <div *ngIf="question.type === 'range' && question.moodAnswer.value">
+          <h4>{{question.question}} </h4>
+
+          <ion-range [max]="question.data.value" snaps="true" ticks="true" min="1" disabled
+            [(ngModel)]="question.moodAnswer.value">
+            <ion-label position="stacked" slot="start">{{question.data.labelMin}}</ion-label>
+            <ion-label position="stacked" slot="end">{{question.data.labelMax}}</ion-label>
+          </ion-range>
+        </div>
+        <div *ngIf="question.type === 'ja/nee' && question.moodAnswer.value">
+          <h4>{{question.question}} </h4>
+          <div>{{question.moodAnswer.value == 1 ?'Ja' : 'Nee'}}</div>
+        </div>
+        <div *ngIf="question.type === 'select' && question.moodAnswer.value">
+          <h4>{{question.question}} </h4>
+          <div>{{question.moodAnswer.value}}</div>
+        </div>
+        <div *ngIf="question.type === 'text' && question.moodAnswer.value">
+          <h4>{{question.question}} </h4>
+          <p>{{question.moodAnswer.value}}</p>
+        </div>
+      </ion-col>
+      <ion-col size="12" *ngIf="mood.entry.thought"  >
+        <h4>Een gevoel of gedachte</h4>
+        {{mood.entry.thought}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<app-toolbar-client></app-toolbar-client>

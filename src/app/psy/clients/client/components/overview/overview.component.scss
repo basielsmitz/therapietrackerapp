@@ -1,0 +1,38 @@
+.info {
+    p {
+        font-weight: bold;
+        margin: 5px 5px;
+    }
+
+}
+.centered {
+    text-align: center;
+}
+.filled {
+    text-align: justify;
+}
+.right {
+    float: right;
+    font-weight: normal;
+}
+.icon-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ion-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+ .input {
+     ion-button {
+         margin-top: 20px;
+     }
+ }
+ .notes {
+    p {
+        margin: 0 0 15px 0;
+    }
+ }
+

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title  *ngIf="session"   color="light">{{session.date |date:"dd/MM/yyyy"}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+  <ion-grid>
+    <ion-row *ngIf="session" >
+      <ion-col>
+        <p>Tijdstip:<span [ngClass]="{'float-right': true}">{{session.startTime.substring(0, 5)}}</span></p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="questions" >
+      <ion-col *ngFor="let question of questions"  size="12">
+        <h4>{{question.question}}</h4>
+        <div *ngIf="question.type === 'ja/nee'" >
+          <ion-button (click)="question.value = true" >ja</ion-button>
+          <ion-button (click)="question.value = false">nee</ion-button>
+        </div>
+        <div *ngIf="question.type === 'range'" >
+            <ion-range snaps="true" ticks="true" min="1" [max]="question.data.value" color="secondary" [(ngModel)]="question.value">
+              <ion-label position="stacked" slot="start">{{question.data.labelMin}}</ion-label>
+              <ion-label position="stacked" slot="end">{{question.data.labelMax}}</ion-label>
+            </ion-range>
+        </div>
+        <div *ngIf="question.type === 'text'" >
+          <ion-item>
+            <ion-input [(ngModel)]="question.value"  placeholder="Uw antwoord"></ion-input>
+          </ion-item>
+        </div>
+        <div *ngIf="question.type === 'select'" >
+          <ion-list>
+            <ion-radio-group [(ngModel)]="question.value">
+              <ion-item *ngFor="let option of question.data" >
+                <ion-label>{{option}}</ion-label>
+                <ion-radio slot="start" [value]="option"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col class="centered">
+          <ion-button  (click)="save()" fill="outline" size="default">Opslaan</ion-button>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>
+<app-toolbar-client></app-toolbar-client>

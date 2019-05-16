@@ -1,0 +1,62 @@
+.goal {
+    p {
+        font-weight: bold;
+        margin: 5px 5px;
+    }
+    .red {
+        color:#E15E46;
+        font-weight: bold;
+    }
+    .green {
+        color: #33A559;
+        font-weight: bold;
+    }
+    
+
+}
+.smallTabs {
+    a {
+        margin-left: 10px;
+    }
+}
+.centered {
+    text-align: center;
+}
+.filled {
+    text-align: justify;
+}
+.right {
+    float: right;
+}
+.active {
+    font-weight: bold;
+}
+.time {
+    font-weight: light;
+    font-size: smaller;
+}
+
+
+
+.icon-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ion-icon {
+        width: 20px;
+        height: 20px;
+    }
+    ion-icon.done {
+        border: var(--ion-color-secondary) solid  2px;
+        border-radius: 50%;
+        padding: 2px;
+        color: var(--ion-color-secondary);
+    }
+    ion-icon.open {
+        border: var(--ion-color-dark) solid  2px;
+        border-radius: 50%;
+        padding: 2px;
+        color: transparent;
+    }
+}

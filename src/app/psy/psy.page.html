@@ -1,0 +1,52 @@
+<ion-split-pane>
+  <ion-menu side="start" contentId="content" menuId="first">
+    <ion-header color="primary">
+        <ion-img src="assets/icon/logo.svg"></ion-img>
+        <ion-title color="light">Therapie tracker</ion-title>
+      <!-- <ion-toolbar color="primary">
+        <ion-title color="light">Therapie tracker</ion-title>
+      </ion-toolbar> -->
+    </ion-header>
+    <ion-content>
+        <div *ngFor="let p of pages">
+            <ion-menu-toggle *ngIf="p.url !== 'logout' && p.url !== 'child'" routerDirection="slide">
+              <ion-item lines="none" button="true" [routerLink]="p.url">
+                <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                {{p.title}}
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-item lines="none" button="true" *ngIf="p.url === 'child'" (click)="p.open = !p.open">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              {{p.title}}
+              <ion-icon slot="end" [name]="p.open ? 'arrow-dropup' : 'arrow-dropdown' "></ion-icon>
+            </ion-item>
+            <div *ngIf="p.open" class="subMenu">
+              <div *ngFor="let sub of p.children">
+                <ion-menu-toggle routerDirection="slide">
+                  <ion-item lines="none" button="true" *ngIf="sub.url !== 'logout'" [routerLink]="sub.url">
+                    <ion-icon slot="start" [name]="sub.icon"></ion-icon>
+                    {{sub.title}}
+    
+                  </ion-item>
+                </ion-menu-toggle>
+              </div>
+            </div>
+            <ion-menu-toggle *ngIf="p.url === 'logout'">
+              <ion-item lines="none" button="true"  (click)="logout()">
+                <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                {{p.title}}
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
+      <!-- <ion-list>
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+          <ion-item [routerLink]="p.url" routerDirection="slide" ><ion-icon [name]="p.icon"></ion-icon>  {{p.title}}</ion-item>
+        </ion-menu-toggle>
+      </ion-list> -->
+    </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet animated="false" id="content" main></ion-router-outlet>
+  
+</ion-split-pane>

@@ -1,0 +1,34 @@
+ion-icon {
+    border-radius: 50%;
+    padding: 2px;
+    color: var(--ion-color-secondary);
+}
+ion-icon.done {
+    border: var(--ion-color-secondary) solid  2px;
+}
+ion-icon.open {
+    border: var(--ion-color-dark) solid  2px;
+    color: transparent;
+}
+.moods {
+    ion-col {
+        border-bottom: solid 2px var(--ion-color-primary);
+        text-align: center;
+        padding: 0, 0 10px 0;
+        margin: 10px;
+
+        div {
+            font-weight: bold;
+            margin-bottom: 5px;
+
+        }
+        .date, .time {
+            font-weight: normal;
+            font-size: 14px
+        }
+        img {
+            width: 50%;
+
+        }
+    }
+}

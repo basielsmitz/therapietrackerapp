@@ -1,0 +1,27 @@
+<ion-footer [hidden]="devWidth > 576">
+  <ion-toolbar>
+      <ion-tabs >
+          <ion-tab-bar slot="bottom">
+            <div *ngFor="let p of pagesLeft">
+                <ion-tab-button  [routerLink]="p.url" >
+                    <ion-label color="tertiary">{{p.title}}</ion-label>
+                    <ion-icon color="secondery" [name]="p.icon"></ion-icon>
+                </ion-tab-button>
+            </div>
+            <div class="add">
+                <ion-tab-button (click)="openMore($event)"  ><ion-icon name="add-circle"></ion-icon></ion-tab-button>
+            </div>
+            <div *ngFor="let p of pagesRight">
+                <ion-tab-button  [routerLink]="p.url" >
+                    <ion-label color="tertiary">{{p.title}}</ion-label>
+                    <ion-icon color="secondery" [name]="p.icon"></ion-icon>
+                </ion-tab-button>
+            </div>
+          </ion-tab-bar>
+      </ion-tabs>
+  </ion-toolbar>
+</ion-footer>
+<div class="popup-card" *ngIf="showMore" >
+    <ion-button fill="outline" color="secondary" [routerLink]="['/client/moods/create']" ><ion-icon name="add-circle" slot="start"></ion-icon> Moodlog</ion-button>
+    <ion-button fill="outline" color="secondary" [routerLink]="['/client/goals/create']" ><ion-icon name="add-circle" slot="start"></ion-icon> Doelstelling</ion-button>
+</div>

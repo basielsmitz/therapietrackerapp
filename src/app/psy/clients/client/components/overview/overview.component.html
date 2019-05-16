@@ -1,0 +1,73 @@
+<ion-grid>
+  <ion-row class="info">
+    <ion-col *ngIf="getNextSessionDate()" size="12">
+      <p>Volgende afspraak<span class="right">{{getNextSessionDate()}}</span></p>
+    </ion-col>
+    <ion-col *ngIf="sessions" size="12">
+      <p>Aantal sessies<span class="right">{{getAmountOfPastSessions()}}</span></p>
+    </ion-col>
+    <ion-col *ngIf="moods && moods.length > 0" size="12">
+      <p>Laatste Mood<span
+        [ngClass]="{
+          'zeerGoed': moods[0].mood.mood == 5, 
+          'goed': moods[0].mood.mood == 4, 
+          'matig': moods[0].mood.mood == 3, 
+          'slecht': moods[0].mood.mood == 2, 
+          'zeerSlecht': moods[0].mood.mood == 1,
+          'right': true
+        }">{{getMood()}}</span>
+      </p>
+    </ion-col>
+    <ion-col *ngIf="getLatestEvaluation()" size="12">
+      <p>Laatste Beoordeling<span
+          [ngClass]="{
+            'zeerGoed': getLatestEvaluation() == 5, 
+            'goed': getLatestEvaluation() == 4, 
+            'matig': getLatestEvaluation() == 3, 
+            'slecht': getLatestEvaluation() == 2, 
+            'zeerSlecht': getLatestEvaluation() == 1,
+            'right': true
+          }">{{getLatestEvaluation()}}/5</span>
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="centered">
+      <ion-button fill="outline"[routerLink]="['/psy/agenda/' + client.id]" size="default">Contact gegevens</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row >
+    <ion-col size="10" offset="1">
+      <h3 class="centered">Diagnose <span class="right"></span></h3>
+    </ion-col>
+    <ion-col size="1">
+      <div class="icon-wrapper">
+        <ion-icon *ngIf="!inputDiagnosis && client.diagnosis"  (click)="inputDiagnosis = !inputDiagnosis" name="create"></ion-icon>
+        <ion-icon *ngIf="inputDiagnosis && client.diagnosis"  (click)="inputDiagnosis = !inputDiagnosis" name="close"></ion-icon>
+      </div>
+    </ion-col>
+    <ion-col size="10" offset="1">
+      <p *ngIf="!inputDiagnosis && client.diagnosis" >{{client.diagnosis}}</p>
+      <ion-item lines="none" *ngIf="inputDiagnosis">
+          <ion-textarea  rows="8" [(ngModel)]="client.diagnosis"></ion-textarea>
+      </ion-item>
+      <div *ngIf="inputDiagnosis" class="centered input">
+          <ion-button (click)="saveDiagnosis()" fill="outline" size="default">Opslaan</ion-button>
+        </div>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="">
+    <ion-col size="10" offset="1">
+      add diagnosis TODO
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="notes.length > 0" >
+    <ion-col size="12">
+      <h3 class="centered">Notities <span class="right"></span></h3>
+    </ion-col>
+    
+    <ion-col class="notes" *ngFor="let note of latestNotes" size="10" offset="1">
+      <p>{{note.body}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>

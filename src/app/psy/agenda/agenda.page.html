@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title color="light">Agenda</ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button color="light" ></ion-back-button>
+            <ion-menu-button color="light" ></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+<ion-content>
+        <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+                <ion-item lines="none" *ngFor="let client of clients" button="true" [routerLink]="[ './' + client.id]">
+                    <ion-icon slot="start" name="contact"></ion-icon>
+                    <ion-label>
+                        <h3>{{client.name}}</h3>
+                        <p>Client</p>
+                    </ion-label>
+                    <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+                </ion-item>
+            </ion-col>  
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
+<app-toolbar></app-toolbar>

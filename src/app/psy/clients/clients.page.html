@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title color="light">Clienten</ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button color="light"></ion-back-button>
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+        <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="centered" (click)="addClient()" >
+                    <ion-button fill="outline" size="default">Cliënt uitnodigen</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let client of clients" class="client-item" [routerLink]="client.id" >
+            <ion-col size="2">
+                <div class="icon-wrapper">
+                    <ion-icon name="contact"></ion-icon>
+                </div>
+            </ion-col>
+            <ion-col>
+                <h3>{{client.name}} <span *ngIf="client.score"   [ngClass]="{'green': client.score > 3, 'red': client.score < 3, 'right': true}">{{client.score}}/5</span></h3>
+                <p *ngIf="client.session" >Afspraak:<span class="right">{{getDate(client.session.date)}} {{client.session.startTime.substring(0,5)}}</span></p>
+                <p *ngIf="client.mood" >Laatste mood:<span [ngClass]="{'green': client.mood > 3, 'red': client.mood < 3, 'right': true}">{{getMood(client.mood)}}</span></p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
+<app-toolbar></app-toolbar>

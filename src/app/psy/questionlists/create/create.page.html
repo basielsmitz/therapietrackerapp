@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title color="light">Nieuwe vragenlijst</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+            <ion-item lines="none">
+                <ion-input placeholder="Titel" [(ngModel)]="title"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-textarea placeholder="Omschrijving" [(ngModel)]="description" rows="2"></ion-textarea>
+              </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col class="centered">
+            <ion-button (click)="newQuestion()"  fill="outline" size="default">Nieuwe vraag</ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="questions.length > 0" >
+        <ion-col size="12" *ngFor="let question of questions" >
+          <ion-item lines="none">
+              <ion-label>
+                <h3>{{question.question}}</h3>
+            </ion-label>
+            <ion-icon name="create" slot="end" (click)="editQuestion(question)" ></ion-icon>
+            <ion-icon name="remove-circle-outline" slot="end" (click)="delete(question)" ></ion-icon>                
+          </ion-item>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col class="centered">
+            <ion-button [disabled]="disabled" fill="outline" size="default" (click)="save()" >Opslaan</ion-button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<app-toolbar></app-toolbar>

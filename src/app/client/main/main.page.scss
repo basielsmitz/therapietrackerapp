@@ -1,0 +1,15 @@
+.subMenu {
+    ion-item {
+        margin-left: 15px;
+    }
+}
+
+ion-header {
+    background: var(--ion-color-primary);
+    text-align: center;
+    padding-bottom: 20px;
+    ion-img {
+        width: 30%;
+        margin: 20px auto 10px auto;
+    }  
+}

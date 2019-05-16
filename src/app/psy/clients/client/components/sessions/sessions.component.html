@@ -1,0 +1,59 @@
+<ion-grid *ngIf="sessions.length > 0" >
+  <ion-row *ngIf="commingSessions.length > 0" >
+    <ion-col size="12">
+      <h3 >Volgende Sessie <span class="right"></span></h3>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="commingSessions.length > 0"  class="comming session">
+    <ion-col size="12">
+      <ion-item lines="none" [routerLink]="['/psy/booking/' + commingSessions[commingSessions.length - 1].session.id]">
+        <ion-icon slot="start" name="clipboard"></ion-icon>
+        <ion-label>
+          {{commingSessions[commingSessions.length - 1].session.date | date:"dd/MM/yyyy"}}
+        </ion-label>
+        <ion-label class="rightAlign" slot="end">
+          {{commingSessions[commingSessions.length - 1].session.startTime.substring(0, 5)}}</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngIf="pastEvaluatedSessions && pastEvaluatedSessions.length > 0"  size="12">
+      <h3 >Voorbije sessies <span class="right"></span></h3>
+    </ion-col>
+  </ion-row>
+  <ion-row class="evaluated session">
+    <ion-col *ngFor="let session of pastEvaluatedSessions" size="12">
+      <ion-item lines="none" [routerLink]="['/psy/booking/' + session.session.id]">
+        <ion-icon slot="start" name="clipboard"></ion-icon>
+        <ion-label>
+          {{session.session.date | date:"dd/MM/yyyy"}}
+        </ion-label>
+        <ion-label class="rightAlign" slot="end"><span
+            [ngClass]="{'green': session.questions[0].answer.value > 3, 'red': session.questions[0].answer.value < 3}">{{session.questions[0].answer.value}}/5</span>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <h3 >Niet gevalueerde sessies <span class="right"></span></h3>
+    </ion-col>
+  </ion-row>
+  <ion-row class="unEvaluated session">
+    <ion-col *ngFor="let session of pastUnEvaluatedSessions" size="12">
+      <ion-item lines="none" [routerLink]="['/psy/booking/' + session.session.id]">
+        <ion-icon slot="start" name="clipboard"></ion-icon>
+        <ion-label>
+          {{session.session.date | date:"dd/MM/yyyy"}}
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid *ngIf="sessions.length <= 0">
+  <ion-row>
+    <ion-col class="centered">
+      deze client heeft nog geen sessies 
+    </ion-col>
+  </ion-row>
+</ion-grid> 

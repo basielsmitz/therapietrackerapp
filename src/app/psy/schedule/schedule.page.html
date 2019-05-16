@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title color="light">Dag schema</ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button color="light"></ion-back-button>
+            <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+    <ion-grid>
+        <ion-row *ngIf="sessions">
+            <ion-col>
+                <h3>Afspraken</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="sessions">
+            <ion-col size="12">
+                <ion-item lines="none" *ngFor="let session of sessions" [routerLink]="['/psy/booking/' + session.id]">
+                    <ion-icon slot="start" [name]="session.icon"></ion-icon>
+                    <ion-label>
+                        <h3>{{session.client[0].name}}</h3>
+                        <p>{{session.location}}</p>
+                    </ion-label>
+                    <ion-label class="right" slot="end">{{session.time}}</ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="!sessions" >
+            <ion-col>
+                <p>
+                    Er zijn vandaag geen afspraken gepland.
+                </p>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="todos">
+            <ion-col>
+                <h3>Todo's</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="todos">
+            <ion-col size="12">
+                <ion-item lines="none" button="true" *ngFor="let todo of todos" (click)="changeStatus(todo)">
+                    <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+                    <ion-label>
+                        <h2>{{todo.name}}</h2>
+                    </ion-label>
+                    <ion-icon [ngClass]="{'open': !todo.status, 'done': todo.status}" slot="end" name="checkmark">
+                    </ion-icon>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<app-toolbar></app-toolbar>

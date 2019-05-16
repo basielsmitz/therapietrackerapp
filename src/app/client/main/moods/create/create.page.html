@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title color="light">Nieuwe moodlog</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3>Hoe voelt u zich?</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngFor="let mood of moods" class="centered mood" clic size="2.4" [ngClass]="{'selected': mood.selected}"
+        (click)="setMood(mood)">
+          <ion-img [src]="mood.src"></ion-img>
+        <p [ngClass]="{
+          'zeerGoed': mood.value === 5, 
+            'goed': mood.value === 4, 
+            'matig': mood.value === 3, 
+            'slecht': mood.value === 2, 
+            'zeerSlecht': mood.value === 1
+        }" >{{mood.title}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h3>Kies de gepaste emoties</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button *ngFor="let emotion of emotions" size="small" [fill]="getFill(emotion.active)"
+          (click)="selectEmotion(emotion)">{{emotion.title}}</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input (keyup.enter)="addEmotion()" placeholder="Voeg emotie toe" [(ngModel)]="newEmotion"></ion-input>
+          <ion-button fill="clear" slot="end" (click)="addEmotion()">
+            <ion-icon name="add-circle"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="questions">
+      <ion-col>
+        <h3>Beantwoord volgende vragen</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="questions">
+      <ion-col *ngFor="let question of questions" size="12">
+        <h4>{{question.question}}</h4>
+        <div class="centered buttons" *ngIf="question.type === 'ja/nee'">
+          <ion-button [fill]="question.value === true ? 'solid' : 'outline'" (click)="question.value = true">ja</ion-button>
+          <ion-button [fill]="question.value === false ? 'solid' : 'outline'" color="danger" (click)="question.value = false">nee</ion-button>
+        </div>
+        <div *ngIf="question.type === 'range'">
+          <ion-item lines="none" >
+            <ion-range snaps="true" ticks="true" min="1" [max]="question.data.value" color="secondary"
+              [(ngModel)]="question.value">
+              <ion-label position="stacked" slot="start">{{question.data.labelMin}}</ion-label>
+              <ion-label position="stacked" slot="end">{{question.data.labelMax}}</ion-label>
+            </ion-range>
+          </ion-item>
+        </div>
+        <div *ngIf="question.type === 'text'">
+          <ion-item lines="none" >
+            <ion-input [(ngModel)]="question.value" placeholder="Uw antwoord"></ion-input>
+          </ion-item>
+        </div>
+        <div *ngIf="question.type === 'select'">
+          <ion-list>
+            <ion-radio-group [(ngModel)]="question.value">
+              <ion-item lines="none"  *ngFor="let option of question.data.options">
+                <ion-label>{{option}}</ion-label>
+                <ion-radio slot="start" [value]="option"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h3>Beschrijf een gevoel of gedachte</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-textarea [(ngModel)]="thought" placeholder="Het gevoel of gedachte"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="centered">
+        <ion-button  (click)="save()" fill="outline" size="default">Opslaan</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<app-toolbar-client></app-toolbar-client>

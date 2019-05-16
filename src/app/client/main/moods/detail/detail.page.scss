@@ -1,0 +1,28 @@
+.mood-image-container {
+    text-align: center;
+    img {
+        width: 25%;
+    }
+}
+.head {
+    font-size: 18px;
+    font-weight: bold;
+}
+h4 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+}
+
+p {
+    padding: 0;
+}
+
+.moodEntry {
+    padding-bottom: 10px;
+    margin-top: 10px;
+    border-bottom: 1px solid var(--ion-color-primary)
+}
+
+ion-range {
+    padding-bottom: 0;
+}

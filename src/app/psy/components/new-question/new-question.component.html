@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title color="light" *ngIf="!question" >Nieuwe Vraag</ion-title>
+    <ion-title color="light" *ngIf="question" >Wijzigen Vraag</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()" color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item lines="none">
+            <ion-input placeholder="Vraag" [(ngModel)]="question"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-textarea placeholder="Omschrijving" [(ngModel)]="description" rows="2"></ion-textarea>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Type</ion-label>
+            <ion-select [(ngModel)]="type">
+              <ion-select-option value="ja/nee">Ja/Nee</ion-select-option>
+              <ion-select-option value="range">Range</ion-select-option>
+              <ion-select-option value="select">Select</ion-select-option>
+              <ion-select-option value="text">Tekst</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none" *ngIf="type === 'range'">
+            <ion-label>Range</ion-label>
+            <ion-input type="number" min="5" max="100" [(ngModel)]="range.value"></ion-input>
+          </ion-item>
+          <ion-item lines="none" *ngIf="type === 'range'">
+            <ion-label>Label min</ion-label>
+            <ion-input placeholder="laagste" [(ngModel)]="range.labelMin"></ion-input>
+          </ion-item>
+          <ion-item lines="none" *ngIf="type === 'range'">
+            <ion-label>Label max</ion-label>
+            <ion-input placeholder="hoogste" [(ngModel)]="range.labelMax"></ion-input>
+          </ion-item>
+          <ion-item lines="none" *ngIf="type === 'select'">
+            <ion-input (keyup.enter)="addOption()" placeholder="Optie" [(ngModel)]="newOption" class="left"></ion-input>
+            <ion-button fill="clear" (click)="addOption()" slot="end">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-list *ngIf="options.length > 0 && type === 'select'" >
+            <ion-list-header>
+              Opties
+            </ion-list-header>
+            <ion-item lines="none" *ngFor="let option of options" >
+              <ion-label>{{option}}</ion-label>
+              <ion-button fill="clear" (click)="removeOption(option)" slot="end">
+                  <ion-icon name="remove-circle-outline"></ion-icon>
+                </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="centered">
+        <ion-button [disabled]="disabled" (click)="save()" fill="outline" size="default">Opslaan</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

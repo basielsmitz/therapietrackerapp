@@ -1,0 +1,33 @@
+p {
+  margin: 0;
+}
+.right {
+  text-align: right;
+}
+.controls {
+  border-bottom: none !important;
+  ion-label {
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+    color: var(--ion-color-secondary)
+  }
+  ion-icon {
+    margin: 0;
+  }
+}
+
+.day {
+    .name {
+        color: var(--ion-color-secondary);
+        font-weight: bold;
+    }
+    ion-item {
+        border-bottom: 1px solid var(--ion-color-secondary);
+    }
+    padding: 5px 1px 5px 1px;
+    margin: 0 2px 1rem 2px;
+  }
+.hidden {
+  color: transparent;
+}

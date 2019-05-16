@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title color="light">Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+  <ion-grid>
+    <ion-row *ngIf="invites">
+      <ion-col *ngIf="invites.length > 0">
+        <h3>Psycholoog invitatie:</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="invites">
+      <ion-col *ngIf="invites.length > 0">
+        <ion-item lines="none"   *ngFor="let invite of invites">
+          <ion-label>
+            {{invite.psy.contact.firstName}} {{invite.psy.contact.familyName}}
+          </ion-label>
+            <ion-icon slot="end" (click)="answerInvitation(true, invite)" name="checkmark" slot="end"></ion-icon>
+            <ion-icon slot="end" (click)="answerInvitation(false, invite)" name="close" slot="end"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="moods">
+      <ion-col>
+        <h3>Laatste moods</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="moods" class="moods">
+      <ion-col *ngFor="let mood of moods">
+        <div class="date">{{mood.createdAt | date:"dd/MM/yyyy"}}</div>
+        <div> <img [src]="getSrc(mood.mood)"></div>
+        <div [ngClass]="getClass(mood.mood)" > {{getValue(mood.mood)}}</div>
+        <div class="time">{{mood.createdAt | date:"HH:mm"}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="comingSessions">
+      <ion-col *ngIf="comingSessions.length > 0">
+        <h3>Volgende sessies</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="comingSessions">
+      <ion-col *ngIf="comingSessions.length > 0" size="12">
+        <ion-item lines="none"   *ngFor="let session of comingSessions">
+          <ion-icon slot="start" name="clipboard"></ion-icon>
+          <ion-label>
+            <h3>{{session.entry.date | date:"dd/MM/yyyy"}}</h3>
+            <p>{{session.entry.location}}</p>
+          </ion-label>
+          <ion-label class="right-align" slot="end">{{session.entry.startTime.substring(0, 5)}}</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="toEvaluateSessions">
+      <ion-col *ngIf="toEvaluateSessions.length > 0">
+        <h3>Te beoordelen sessies</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="toEvaluateSessions">
+      <ion-col *ngIf="toEvaluateSessions.length > 0" size="12">
+        <ion-item lines="none"  *ngFor="let session of toEvaluateSessions"
+          [routerLink]="['/client/sessions/' + session.entry.id + '/evaluate']">
+          <ion-icon slot="start" name="clipboard"></ion-icon>
+          <ion-label>
+            <h3>{{session.entry.date | date:"dd/MM/yyyy"}}</h3>
+          </ion-label>
+          <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="goals">
+      <ion-col *ngIf="goals.length > 0">
+        <h3>Goals</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="goals">
+      <ion-col size="12" *ngIf="goals.length > 0">
+        <ion-item lines="none"  button="true" *ngFor="let goal of goals" (click)="changeStatus(goal)">
+          <ion-icon slot="start" name="radio-button-on"></ion-icon>
+          <ion-label>
+            <h2>{{goal.title}}</h2>
+            <p class="time" *ngIf="goal.startDate && goal.endDate">
+              {{goal.startDate.substring(0, 10)}} - {{goal.endDate.substring(0, 10)}}
+            </p>
+            <p class="time" *ngIf="goal.endDate && !goal.startDate">
+              {{goal.endDate.substring(0, 10)}}
+            </p>
+          </ion-label>
+          <ion-icon [ngClass]="{'open': !goal.status, 'done': goal.status}" slot="end" name="checkmark"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<app-toolbar-client></app-toolbar-client>

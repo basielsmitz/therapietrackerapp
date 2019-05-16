@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title color="light">Nieuwe booking</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+  <ion-list>
+    <ion-item lines="none" *ngIf="clients">
+      <ion-label>Cliënt</ion-label>
+      <ion-select [(ngModel)]="client">
+        <ion-select-option *ngFor="let client of clients.data" [value]="client.id">{{client.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none" *ngIf="timeOk">
+      <ion-label>Tijdstip</ion-label>
+      <ion-datetime display-format="HH:mm" [hourValues]="times" minuteValues="0,15,30,45" [(ngModel)]="time">
+      </ion-datetime>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Locatie</ion-label>
+      <ion-input [(ngModel)]="location"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col size="10">
+      <h3>Vragenlijsten</h3>
+    </ion-col>
+    <ion-col size="1">
+      <div class="icon-wrapper">
+        <ion-icon (click)="openQuestionSelect()" name="add-circle-outline"></ion-icon>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngFor="let list of selectedQuestionLists">
+        <ion-item lines="none">
+            <ion-icon slot="start" name="list-box"></ion-icon>
+            <ion-label>{{getListName(list)}}</ion-label>
+            <ion-icon *ngIf="getListName(list) !== 'Session rating'"  (click)="removeQuestionlist(list)" slot="end" name="trash"></ion-icon>
+          </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-select hidden #selectQuestionLists *ngIf="questionLists" [(ngModel)]="selectedQuestionLists" multiple="true">
+    <ion-select-option *ngFor="let questionlist of questionLists.data.entries" [disabled]="questionlist.title == 'Session rating'" [value]="questionlist.id">
+        {{questionlist.title}}</ion-select-option>
+  </ion-select>
+  <ion-row>
+    <ion-col size="10">
+      <h3>notities</h3>
+    </ion-col>
+    <ion-col size="1">
+      <div class="icon-wrapper">
+        <ion-icon (click)="openNew()" [name]="iconShown"></ion-icon>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item lines="none" *ngIf="showNewNote">
+      <ion-label position="stacked">Nieuwe notitie <span class="right">
+          <ion-button (click)="addNote()" fill="outline" size="small">save</ion-button>
+        </span></ion-label>
+      <ion-textarea [(ngModel)]="noteText" rows="4"></ion-textarea>
+    </ion-item>
+    <ion-grid *ngIf="notes.length > 0">
+      <ion-row *ngFor="let note of notes">
+        <ion-col size="11">
+          <p>{{note}}</p>
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="deleteNote(note)" name="trash"></ion-icon>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="centered">
+        <ion-button (click)="save()" [disabled]="!readyToPost" size="default" fill="outline">Opslaan</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<app-toolbar></app-toolbar>

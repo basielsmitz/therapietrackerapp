@@ -1,0 +1,27 @@
+.backdrop {
+    background-image: linear-gradient(var(--ion-color-primary), var(--ion-color-secondary));
+    height: 100%;
+    display: flex;
+    align-items: center;
+    ion-card {
+        background: white;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        text-align: center;
+        ion-img {
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        a {
+            margin-top: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        ion-button {
+            margin-top: 30px
+        }
+       
+    }
+}

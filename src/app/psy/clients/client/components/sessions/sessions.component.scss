@@ -1,0 +1,43 @@
+.session {
+    p {
+        font-weight: bold;
+        margin: 5px 5px;
+    }
+    .red {
+        color:#E15E46;
+        font-weight: bold;
+    }
+    .green {
+        color: #33A559;
+        font-weight: bold;
+    }
+    ion-icon {
+        width: 20px;
+        height: 20px;
+        padding-top: 2px;
+    }
+
+}
+.centered {
+    text-align: center;
+}
+.filled {
+    text-align: justify;
+}
+.right {
+    float: right;
+    font-weight: normal;
+}
+.rightAlign {
+    text-align: right;
+}
+.icon-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ion-icon {
+        width: 20px;
+        height: 20px;
+    }
+}

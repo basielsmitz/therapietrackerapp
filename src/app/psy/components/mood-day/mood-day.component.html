@@ -1,0 +1,31 @@
+<ion-row [routerLink]="[urlPrefix, moodDay.date]">
+  <ion-col size="12">
+    <p>{{moodDay.date}}<span [ngClass]="{
+      'zeerGoed': moodDay.averageMood === 5, 
+      'goed': moodDay.averageMood === 4, 
+      'matig': moodDay.averageMood === 3, 
+      'slecht': moodDay.averageMood === 2, 
+      'zeerSlecht': moodDay.averageMood === 1, 
+      'right': true}">{{getAverageMood(moodDay.averageMood)}}</span></p>
+  </ion-col>
+  <ion-col class="centered" size="2.4">
+    <img src="assets/moodIcons/zeerGoed.svg"><br>
+    {{getOccurrence(5)}}
+  </ion-col>
+  <ion-col class="centered" size="2.4">
+    <img src="assets/moodIcons/goed.svg"><br>
+    {{getOccurrence(4)}}
+  </ion-col>
+  <ion-col class="centered" size="2.4">
+    <img src="assets/moodIcons/matig.svg"><br>
+    {{getOccurrence(3)}}
+  </ion-col>
+  <ion-col class="centered" size="2.4">
+    <img src="assets/moodIcons/slecht.svg"><br>
+    {{getOccurrence(2)}}
+  </ion-col>
+  <ion-col class="centered" size="2.4">
+    <img src="assets/moodIcons/zeerSlecht.svg"><br>
+    {{getOccurrence(1)}}
+  </ion-col>
+</ion-row>

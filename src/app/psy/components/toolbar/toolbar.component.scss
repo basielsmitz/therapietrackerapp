@@ -1,0 +1,17 @@
+ion-tab-bar {
+    justify-content: space-around;
+}
+
+ .popup-card {
+    position: fixed;
+    bottom: 60px;
+    width: 50%;
+    right: 5px;
+    text-align: right;
+    ion-button {
+        background: white;
+    }
+}
+ion-label {
+    font-size: 11px;
+}

@@ -1,0 +1,71 @@
+body {
+    background-color: var(--ion-color-light);
+}
+
+h3 {
+    color: var(--ion-color-secondary);
+    font-weight: bold;
+    font-size: 20px;
+}
+h1, h2, h3, h4 {
+    color: var(--ion-color-secondary);
+}
+
+ion-item {
+    p, h1, h2, h3, h4 {
+        color: var(--ion-color-dark);
+    }
+}
+ion-icon {
+    color: var(--ion-color-secondary);
+}
+ion-tab-button {
+    color: var(--ion-color-secondary);
+
+}
+ion-header {
+    ion-icon {
+        color: var(--ion-color-light);
+    }
+}
+.right-align {
+    text-align: right;
+    font-weight: normal;
+}
+.right {
+    float: right;
+}
+.zeerSlecht {
+    color: #E15E46;
+}
+.slecht {
+    color: #FC9B89;
+}
+.matig {
+    color: #408473;
+}
+.goed {
+    color: #64B881;
+}
+.zeerGoed {
+    color: #33A559;
+}
+ion-item {
+    border-bottom: solid 1px var(--ion-color-primary);
+}
+.centered {
+    text-align: center;
+}
+ion-range {
+    ion-label {
+      position: absolute;
+      top: 0;
+      z-index: -1;
+    }
+    ion-label:nth-of-type(1) {
+      left: 1px;
+    }
+    ion-label:nth-of-type(2) {
+      right: 1px;
+    }
+  }

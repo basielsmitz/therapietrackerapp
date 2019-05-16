@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title color="light">Booking</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+  <ion-grid *ngIf="month">
+    <ion-row>
+      <ion-col size="12">
+        <ion-item lines="none" class="controls">
+            <ion-icon slot="start"  (click)="setVisibleWeek(currentWeek - 1 )" [ngClass]="{'hidden': currentWeek <= 1}"  name="arrow-round-back"></ion-icon>
+            <ion-label>        {{visibleWeek[0].date}} - {{visibleWeek[visibleWeek.length - 1].date}}
+            </ion-label>
+            <ion-icon slot="end" *ngIf="currentWeek < month[month.length - 1].week" (click)="setVisibleWeek(currentWeek + 1 )"
+            name="arrow-round-forward"></ion-icon>        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="day" *ngFor="let day of visibleWeek">
+      <ion-col class="name" size="12">
+        {{day.name}} {{day.date}}
+      </ion-col>
+      <ion-col>
+        <ion-item lines="none"  class="time-slot" *ngFor="let item of day.sessions"(click)="bookingAction(item, day)">
+            <ion-icon slot="start" *ngIf="!item.type" name="clipboard"></ion-icon>
+            <ion-icon slot="start" *ngIf="item.type === 'free' && item.from !== item.end" name="add-circle-outline"></ion-icon>
+            <ion-label *ngIf="!item.type" >{{item.startTime}}</ion-label>
+            <ion-label slot="end" class="right" *ngIf="!item.type">{{item.client[0].name}}</ion-label>
+            <ion-label *ngIf="item.type === 'free' && item.from !== item.end" >{{item.start}} - {{item.end}}</ion-label>
+            <ion-label slot="end" class="right" *ngIf="item.type === 'free' && item.from !== item.end">Vrij</ion-label>
+        </ion-item>
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<app-toolbar></app-toolbar>

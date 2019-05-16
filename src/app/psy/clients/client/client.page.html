@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="client" color="light">{{client.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+<ion-segment scrollable="true" (ionChange)="segmentChanged($event)" [value]="view">
+  <ion-segment-button value="overview">
+    <ion-label>Overzicht</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="moods">
+    <ion-label>Moods</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="sessions">
+    <ion-label>Sessies</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="goals">
+    <ion-label>Goals</ion-label>
+  </ion-segment-button>
+</ion-segment>
+<ion-content>
+  <div *ngIf="sessions && goals && moods && client && notes">
+    <app-psy-overview [sessions]="sessions" [client]="client" [notes]="notes" [moods]="moods" *ngIf="view === 'overview'">
+    </app-psy-overview>
+    <app-psy-goals [goals]="goals" *ngIf="view === 'goals'"></app-psy-goals>
+    <app-psy-sessions [sessions]="sessions" *ngIf="view === 'sessions'"></app-psy-sessions>
+    <app-psy-moods [moods]="moods" *ngIf="view === 'moods'"></app-psy-moods>
+
+  </div>
+</ion-content>
+<app-toolbar></app-toolbar>

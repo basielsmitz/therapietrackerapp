@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="clientContact" color="light">{{clientContact.contact.firstName}}
+      {{clientContact.contact.familyName}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+  <ion-grid>
+    <ion-row *ngIf="clientContact" >
+      <ion-col size="12">
+        <ion-item lines="none">
+          <label slot="start">Relatie</label>
+          <label slot="end" class="right">Client</label>
+        </ion-item>
+        <ion-item lines="none">
+          <label slot="start">Voornaam</label>
+          <label slot="end" class="right">{{clientContact.contact.firstName}}</label>
+        </ion-item>
+        <ion-item lines="none">
+          <label slot="start">Achternaam</label>
+          <label slot="end" class="right">{{clientContact.contact.familyName}}</label>
+        </ion-item>
+        <ion-item lines="none">
+          <label slot="start">Email</label>
+          <label slot="end" class="right">{{clientContact.user.email}}</label>
+        </ion-item>
+        <ion-item lines="none">
+          <label slot="start">GSM</label>
+          <label slot="end" class="right"><a [href]="getNumber()">{{clientContact.contact.phone}}</a></label>
+        </ion-item>
+        <ion-item lines="none">
+          <label slot="start">Geboortedatum</label>
+          <label slot="end" class="right">{{clientContact.contact.birthdate | date:"dd/MM/yyyy"}}</label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<app-toolbar></app-toolbar>

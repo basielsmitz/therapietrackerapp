@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title   color="light">Sessions</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+  <ion-grid>
+      <ion-row *ngIf="comingSessions">
+          <ion-col *ngIf="comingSessions.length > 0">
+            <h3>Volgende sessies</h3>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="comingSessions">
+          <ion-col *ngIf="comingSessions.length > 0" size="12">
+            <ion-item *ngFor="let session of comingSessions">
+              <ion-icon slot="start" name="clipboard"></ion-icon>
+              <ion-label>
+                <h3>{{session.entry.date | date:"dd/MM/yyyy"}}</h3>
+                <p>{{session.entry.location}}</p>
+              </ion-label>
+              <ion-label class="right" slot="end">{{session.entry.startTime.substring(0, 5)}}</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="toEvaluateSessions" >
+            <ion-col *ngIf="toEvaluateSessions.length > 0">
+              <h3>Te beoordelen sessies</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="toEvaluateSessions">
+            <ion-col *ngIf="toEvaluateSessions.length > 0" size="12">
+              <ion-item *ngFor="let session of toEvaluateSessions"
+                [routerLink]="['/client/sessions/' + session.entry.id + '/evaluate']">
+                <ion-icon slot="start" name="clipboard"></ion-icon>
+                <ion-label>
+                  <h3>{{session.entry.date | date:"dd/MM/yyyy"}}</h3>
+                </ion-label>
+                <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="evaluatedSessions" >
+              <ion-col *ngIf="evaluatedSessions.length > 0">
+                <h3>Beoordeelde sessies</h3>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="evaluatedSessions">
+              <ion-col *ngIf="evaluatedSessions.length > 0" size="12">
+                <ion-item *ngFor="let session of evaluatedSessions"
+                  [routerLink]="['/client/sessions/' + session.entry.id]">
+                  <ion-icon slot="start" name="clipboard"></ion-icon>
+                  <ion-label>
+                    <h3>{{session.entry.date | date:"dd/MM/yyyy"}}</h3>
+                  </ion-label>
+                  <ion-label [ngClass]="{'green': getScore(session) > 3, 'red': getScore(session) < 3, 'right': true}" slot="end">{{getScore(session)}}/5</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+  </ion-grid>
+</ion-content>
+<app-toolbar-client></app-toolbar-client>

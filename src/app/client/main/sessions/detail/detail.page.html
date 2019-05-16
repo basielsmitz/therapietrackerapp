@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar *ngIf="session"  color="primary">
+    <ion-title *ngIf="session.data"  color="light">{{session.data.date | date:"dd/MM/yyyy"}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-progress-bar *ngIf="loading"  type="indeterminate"></ion-progress-bar>
+  <ion-grid *ngIf="session" >
+    <ion-row>
+      <ion-col *ngIf="session.data">
+        <p>Tijdstip:<span [ngClass]="{'right': true}">{{session.data.startTime.substring(0, 5)}}</span></p>
+        <p>locatie:<span [ngClass]="{'right': true}">{{session.data.location}}</span></p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="generalScore" >
+      <ion-col class="centered">
+       <p [ngClass]="{
+        'zeerGoed': generalScore == 5, 
+        'goed': generalScore == 4, 
+        'matig': generalScore == 3, 
+        'slecht': generalScore == 2, 
+        'zeerSlecht': generalScore == 1
+      }">{{generalScore}}/5</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="session.answers && session.answers.length > 0" >
+        <ion-col size="12">
+          <h3>Evaluatie</h3>
+        </ion-col>
+        <ion-col size="12">
+          <ion-grid>
+              <ion-row *ngIf="render" >
+                  <ion-col size="12" *ngFor="let answer of session.answers">
+                      <div *ngIf="getQuestion(answer.evaluationQuestionId).type === 'range' && answer.value">
+                        <h4>{{getQuestion(answer.evaluationQuestionId).question}} </h4>
+              
+                        <ion-range [max]="getQuestion(answer.evaluationQuestionId).data.value" snaps="true" ticks="true" min="1" disabled
+                          [(ngModel)]="answer.value">
+                          <ion-label position="stacked" slot="start">{{getQuestion(answer.evaluationQuestionId).data.labelMin}}</ion-label>
+                          <ion-label position="stacked" slot="end">{{getQuestion(answer.evaluationQuestionId).data.labelMax}}</ion-label>
+                        </ion-range>
+                      </div>
+                      <div *ngIf="getQuestion(answer.evaluationQuestionId).type === 'ja/nee' && getQuestion(answer.evaluationQuestionId).moodAnswer.value">
+                        <h4>{{getQuestion(answer.evaluationQuestionId).question}} </h4>
+                        <div>{{answer.value == 1 ?'Ja' : 'Nee'}}</div>
+                      </div>
+                      <div *ngIf="getQuestion(answer.evaluationQuestionId).type === 'select' && getQuestion(answer.evaluationQuestionId).moodAnswer.value">
+                        <h4>{{getQuestion(answer.evaluationQuestionId).question}} </h4>
+                        <div>{{answer.value}}</div>
+                      </div>
+                      <div *ngIf="getQuestion(answer.evaluationQuestionId).type === 'text' && getQuestion(answer.evaluationQuestionId).moodAnswer.value">
+                        <h4>{{getQuestion(answer.evaluationQuestionId).question}} </h4>
+                        <p>{{answer.value}}</p>
+                      </div>
+                    </ion-col>
+              </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>
+<app-toolbar-client></app-toolbar-client>
