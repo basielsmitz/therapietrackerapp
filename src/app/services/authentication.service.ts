@@ -32,12 +32,9 @@ export class AuthenticationService {
       this.storage.set('roleId', login.role.id);
       this.storage.set('userId', login.userId);
       this.storage.set('authToken', login.token);
-      console.log('test');
       if (login.role.role === 'client') {
-        console.log('it\'s a client');
         this.router.navigate(['client/dashboard']);
       } else {
-        console.log('it\'s not a client');
         this.router.navigate(['psy/schedule']);
       }
     }

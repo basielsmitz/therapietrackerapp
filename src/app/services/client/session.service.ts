@@ -12,9 +12,6 @@ export class SessionService {
   constructor(
     private http: HttpClient,
   ) { }
-  test() {
-    console.log('test');
-  }
   getSessions(token) {
     return this.http.get(
       `${this.baseUrl}`,

@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { NewQuestionComponent } from './../../components/new-question/new-question.component';
 import { QuestionlistService } from './../../../services/psy/questionlist.service';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -20,6 +21,7 @@ export class CreatePage implements OnInit, DoCheck {
     private modalController: ModalController,
     private questionlistService: QuestionlistService,
     private storage: Storage,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -103,5 +105,8 @@ export class CreatePage implements OnInit, DoCheck {
       description: this.description,
       questions: this.questions,
     }, this.token).toPromise();
+    if(ql) {
+      this.router.navigate(['./psy/questionlists'])
+    }
   }
 }

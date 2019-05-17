@@ -12,9 +12,6 @@ export class InvitationService {
   constructor(
     private http: HttpClient,
   ) { }
-  test() {
-    console.log('testing');
-  }
   getInvites(token) {
     return this.http.get(
       `${this.baseUrl}`,

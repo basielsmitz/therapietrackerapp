@@ -6,14 +6,15 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/favicon.png",
-          "/logo.svg",
+          "assets/icon/favicon.png",
+          "assets/icon//logo.svg",
           "/index.html",
           "/*.css",
           "/*.js"
         ]
       }
-    }, {
+    },
+    {
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
@@ -22,6 +23,105 @@
           "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "psy-client",
+      "urls": [
+        "https://therapietracker-backend.herokuapp.com/psy/client/",
+        "https://therapietracker-backend.herokuapp.com/psy/client/**",
+        "https://therapietracker-backend.herokuapp.com/psy/client/**/goal",
+        "https://therapietracker-backend.herokuapp.com/psy/client/**/session",
+        "https://therapietracker-backend.herokuapp.com/psy/client/**/session/**",
+        "https://therapietracker-backend.herokuapp.com/psy/client/**/mood",
+        "https://therapietracker-backend.herokuapp.com/psy/client/**/mood/**",
+        "https://therapietracker-backend.herokuapp.com/psy/client/**/notes"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "15m",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "psy-ql",
+      "urls": [
+        "https://therapietracker-backend.herokuapp.com/psy/questionlist/",
+        "https://therapietracker-backend.herokuapp.com/psy/questionlist/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "15m",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "psy-session",
+      "urls": [
+        "https://therapietracker-backend.herokuapp.com/psy/session/",
+        "https://therapietracker-backend.herokuapp.com/psy/session/today/**",
+        "https://therapietracker-backend.herokuapp.com/psy/session/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "15m",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "psy-todo",
+      "urls": [
+        "https://therapietracker-backend.herokuapp.com/psy/todo/"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "15m",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "client-goal",
+      "urls": [
+        "https://therapietracker-backend.herokuapp.com/client/goal/"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "15m",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "client-mood",
+      "urls": [
+        "https://therapietracker-backend.herokuapp.com/client/mood/",
+        "https://therapietracker-backend.herokuapp.com/client/mood/data",
+        "https://therapietracker-backend.herokuapp.com/client/mood/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "15m",
+        "timeout": "10s",
+        "strategy": "freshness"
+      }
+    },
+    {
+      "name": "client-session",
+      "urls": [
+        "https://therapietracker-backend.herokuapp.com/client/session/",
+        "https://therapietracker-backend.herokuapp.com/client/session/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "15m",
+        "timeout": "10s",
+        "strategy": "freshness"
       }
     }
   ]

@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { NewQuestionComponent } from './../../components/new-question/new-question.component';
 import { QuestionlistService } from './../../../services/psy/questionlist.service';
 import { Storage } from '@ionic/storage';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail',
@@ -23,6 +23,7 @@ export class DetailPage implements OnInit {
     private questionlistService: QuestionlistService,
     private storage: Storage,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -123,5 +124,9 @@ export class DetailPage implements OnInit {
       description: this.description,
       questions: this.questions,
     }, this.token).toPromise();
+
+    if (ql) {
+      this.router.navigate(['./psy/questionlists'])
+    }
   }
 }

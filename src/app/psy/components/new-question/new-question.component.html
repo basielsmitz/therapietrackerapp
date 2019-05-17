@@ -32,15 +32,15 @@
           </ion-item>
           <ion-item lines="none" *ngIf="type === 'range'">
             <ion-label>Range</ion-label>
-            <ion-input type="number" min="5" max="100" [(ngModel)]="range.value"></ion-input>
+            <ion-input class="right-align" type="number" min="5" max="100" [(ngModel)]="range.value"></ion-input>
           </ion-item>
           <ion-item lines="none" *ngIf="type === 'range'">
             <ion-label>Label min</ion-label>
-            <ion-input placeholder="laagste" [(ngModel)]="range.labelMin"></ion-input>
+            <ion-input class="right-align" placeholder="laagste" [(ngModel)]="range.labelMin"></ion-input>
           </ion-item>
           <ion-item lines="none" *ngIf="type === 'range'">
             <ion-label>Label max</ion-label>
-            <ion-input placeholder="hoogste" [(ngModel)]="range.labelMax"></ion-input>
+            <ion-input class="right-align" placeholder="hoogste" [(ngModel)]="range.labelMax"></ion-input>
           </ion-item>
           <ion-item lines="none" *ngIf="type === 'select'">
             <ion-input (keyup.enter)="addOption()" placeholder="Optie" [(ngModel)]="newOption" class="left"></ion-input>

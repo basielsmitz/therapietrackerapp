@@ -54,7 +54,7 @@ export class PopoverPsyComponent implements OnInit {
                 const error = new Error('Gelieve een naam te geven');
                 throw error;
               }
-              const invite = await this.http.post('http://localhost:3000/psy/todo', data, {
+              const invite = await this.http.post('https://therapietracker-backend.herokuapp.com/psy/todo', data, {
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + token,
@@ -118,7 +118,7 @@ export class PopoverPsyComponent implements OnInit {
                 const error = new Error('Vul beide velden in');
                 throw error;
               }
-              const invite = await this.http.post('http://localhost:3000/psy/client', data, {
+              const invite = await this.http.post('https://therapietracker-backend.herokuapp.com/psy/client', data, {
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + token,

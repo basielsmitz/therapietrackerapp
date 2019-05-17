@@ -128,8 +128,15 @@ export class DetailPage implements OnInit, DoCheck {
     this.showNewNote = false;
     this.iconShown = 'add-circle-outline';
   }
-  save() {
-    this.checkValues();
+  async save() {
+    const session = await this.sessionService.updateSession(this.token, {
+      questionLists: this.selectedQuestionLists.map(list => {
+        return { id: list };
+      })
+    });
+    if (session) {
+      this.router.navigate(['./psy/booking/']);
+    }
   }
   async cancel() {
     const alert = await this.alertController.create({
